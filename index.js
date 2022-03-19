@@ -5,7 +5,7 @@ async function getFile(filePath) {
   const encoding = "utf-8";
   try {
     const text = await fs.promises.readFile(filePath, encoding);
-    console.log(getLinks(text));
+    return getLinks(text);
   } catch (error) {
     handleError(error);
   }
@@ -23,7 +23,7 @@ function getLinks(text){
   while((temp = (regex.exec(text))) !== null){
     result.push({[temp[1]]: temp[2]});
   }
-  return result;
+  return result.length === 0 ? 'There are no links' : result;
 }
 
 //* Then method
@@ -39,4 +39,6 @@ function getLinks(text){
 
 
 
-getFile('./files/firstText.md');
+// getFile('./files/firstText.md');
+
+module.exports = getFile;
