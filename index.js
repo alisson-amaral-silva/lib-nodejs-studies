@@ -1,20 +1,31 @@
 const chalk = require("chalk");
 const fs = require("fs");
 
-function getFile(filePath) {
+async function getFile(filePath) {
   const encoding = "utf-8";
-  fs.readFile(filePath, encoding, handleCallback);
-}
-
-function handleCallback(error, text) {
-  if(error){
+  try {
+    const text = await fs.promises.readFile(filePath, encoding);
+    console.log(chalk.green(text));
+  } catch (error) {
     handleError(error);
   }
-  console.log(chalk.green(text));
 }
 
 function handleError(error){
   throw new Error(chalk.red(error.code, 'there is no file in this filepath'));
 }
+
+//* Then method
+// function getFile(filePath) {
+//   const encoding = "utf-8";
+//   fs.promises.readFile(filePath, encoding)
+//   .then((text) => {
+//     console.log(chalk.green(text));
+//   }).catch((error) => {
+//     handleError(error);
+//   });
+// }
+
+
 
 getFile('./files/firstText.md');
