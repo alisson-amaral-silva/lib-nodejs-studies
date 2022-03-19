@@ -11,5 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "chalk": "^4.1.2"
+  },
+  "esversion": 6,
+  "devDependencies": {
+    "prettier": "2.6.0"
   }
 }

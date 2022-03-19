@@ -1,11 +1,13 @@
-const chalk = require('chalk');
+const chalk = require("chalk");
+const fs = require("fs");
 
-console.log(chalk.blue('Hello world!'));
-
-const paragraph = 'Function';
-
-function text(string) {
-  return string;
+function getFile(filePath) {
+  const encoding = "utf-8";
+  fs.readFile(filePath, encoding, handleCallback);
 }
 
-console.log(text(paragraph));
+function handleCallback(_, text) {
+  console.log(chalk.green(text));
+}
+
+getFile('./files/firstText.md');
