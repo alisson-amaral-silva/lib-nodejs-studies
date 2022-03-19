@@ -6,8 +6,15 @@ function getFile(filePath) {
   fs.readFile(filePath, encoding, handleCallback);
 }
 
-function handleCallback(_, text) {
+function handleCallback(error, text) {
+  if(error){
+    handleError(error);
+  }
   console.log(chalk.green(text));
+}
+
+function handleError(error){
+  throw new Error(chalk.red(error.code, 'there is no file in this filepath'));
 }
 
 getFile('./files/firstText.md');
